@@ -15,10 +15,20 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-
   
+  programs.ssh = {
+    enable = true;
+
+    extraConfig = ''
+      Host github.com
+        IdentityFile ~/.ssh/id_ed25519_github
+        User melonSorbet
+
+      Host gitlab.com
+        IdentityFile ~/.ssh/id_ed25519_gitlab
+        User kilicyunusemre
+    '';
+  };
   home.packages = with pkgs;[
     
     mesa
@@ -91,7 +101,23 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+  # Create the .development directory
+  
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  xdg.dataFile = {
+    "applications/Alacritty.desktop".text = ''
+      [Desktop Entry]
+      Version=1.0
+      Name=Alacritty
+      Comment=Alacritty terminal emulator
+      Exec=nixGL alacritty %F
+      Icon=Alacritty
+      Terminal=false
+      Type=Application
+      Categories=Utility;TerminalEmulator;
+      StartupNotify=true
+    '';
+  };
+
+   programs.home-manager.enable = true;
 }
