@@ -42,14 +42,13 @@
     neovim	
     wl-clipboard
 
+    jetbrains-mono
     jetbrains.rust-rover
     vscode
     rustc
     cargo
     gcc
     git
-    
-    
   ];
  programs.alacritty = {
     enable = true;
@@ -119,5 +118,13 @@
     '';
   };
 
-   programs.home-manager.enable = true;
+   home.file.".config/nvim".source  = builtins.fetchGit{
+   	url = "https://github.com/melonSorbet/nvim.git";
+	ref = "master";
+   };
+   home.file.".config/alacritty".source  = builtins.fetchGit{
+   	url = "https://github.com/melonSorbet/alacritty.git";
+	ref = "main";
+   };
+  programs.home-manager.enable = true;
 }
