@@ -58,3 +58,6 @@ lines = 60
 [window.padding]
 x = 0
 y = 0
+
+[terminal.shell]
+program = "/home/user/.nix-profile/bin/zsh"
