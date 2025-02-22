@@ -14,7 +14,7 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
-
+  
   
   programs.ssh = {
     enable = true;
@@ -30,7 +30,7 @@
     '';
   };
   home.packages = with pkgs;[
-    
+    zsh
     mesa
     wayland
     egl-wayland
@@ -41,17 +41,33 @@
     kitty
     neovim	
     wl-clipboard
+    ripgrep
 
+    jetbrains-mono
     jetbrains.rust-rover
+    rustup
     vscode
-    rustc
-    cargo
     gcc
     git
-    
-    
   ];
- programs.alacritty = {
+
+
+  #zsh configuration
+  programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;  #alacritty configuration
+      autosuggestion.enable = true; # Correct option name
+
+    shellAliases = {
+        vim = "nvim";
+    };
+    oh-my-zsh = {
+        enable = true;
+        theme = "agnoster";
+    };
+  };
+  programs.alacritty = {
     enable = true;
     settings = {
       env = {
@@ -119,5 +135,13 @@
     '';
   };
 
-   programs.home-manager.enable = true;
+   home.file.".config/nvim".source  = builtins.fetchGit{
+   	url = "https://github.com/melonSorbet/nvim.git";
+	ref = "master";
+   };
+   home.file.".config/alacritty".source  = builtins.fetchGit{
+   	url = "https://github.com/melonSorbet/alacritty.git";
+	ref = "main";
+   };
+  programs.home-manager.enable = true;
 }
