@@ -30,25 +30,7 @@
     '';
   };
   home.packages = with pkgs;[
-    zsh
-    mesa
-    wayland
-    egl-wayland
-    kitty
-    alacritty
-    discord
-
-    kitty
-    neovim	
-    wl-clipboard
-    ripgrep
-
-    jetbrains-mono
-    jetbrains.rust-rover
-    rustup
-    vscode
-    gcc
-    git
+    
   ];
 
 
